@@ -1,8 +1,8 @@
 /**
  * eventemitter
  */
-
-var EventEmitter = require('events').EventEmitter;
+var EventEmitter = require('events');
+//var EventEmitter = require('events').EventEmitter;
 var util = require('util');
 function Person(name){
     //EventEmitter.call(this);
@@ -27,12 +27,15 @@ var eatDinner = function(){
 var eatCookie = function(){
     console.log('吃点零食');
 }
-me.on('晚上饿了',eatDinner);//触发一次就取消监听
-me.once('晚上饿了',eatCookie);
+var eat = function(food){
+    console.log('吃'+food)
+}
+me.once('晚上饿了',eat);//触发一次就取消监听
+me.once('晚上饿了',eat);
 //me.removeAllListeners();
-me.removeListener('晚上饿了',eatCookie);
-me.emit('晚上饿了');
-me.emit('晚上饿了');
+//me.removeListener('晚上饿了',eatCookie);
+me.emit('晚上饿了','优乐美');
+me.emit('晚上饿了','香飘飘');
 
 console.log(me.listeners('晚上饿了'));// []
 

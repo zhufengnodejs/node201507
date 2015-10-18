@@ -9,11 +9,16 @@ var mime = require('mime');
  * request 请求 代表客户端的请求
  * response 响应 代表服务器端的响应
  */
-http.createServer(function(request,response){
-   if( request.url == '/ajax'){
-       response.setHeader('Access-Control-Allow-Origin','*')
-       response.end('ajax');
-   }else{
-       response.end(fs.readFileSync('index2.html'));//结束响应 挂掉电话
-   }
-}).listen(8080);//在对应的端口上实现监听
+var server = http.createServer();
+server.on('lele',function(){
+
+});
+server.on('request',function(request,response){
+    if( request.url == '/ajax'){
+        response.setHeader('Access-Control-Allow-Origin','*')
+        response.end('ajax');
+    }else{
+        response.end(fs.readFileSync('index2.html'));//结束响应 挂掉电话
+    }
+});
+server.listen(8080);//在对应的端口上实现监听
