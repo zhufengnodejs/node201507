@@ -1,0 +1,7 @@
+/**
+
+ **/
+
+var person = {
+    name:'zfpx'
+}

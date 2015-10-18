@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+<script>
+    function City(name){
+        this.name = name;
+        this.age = 600;
+    }
+
+    var cityFactory = function(name){
+        var city = new City(name);
+        /*return function(){
+            return city;
+        }*/
+        return city;
+    }
+   var cities = [];
+    setInterval(function(){
+        cities.push(cityFactory('北京'));
+    },1)
+</script>
+</html>
