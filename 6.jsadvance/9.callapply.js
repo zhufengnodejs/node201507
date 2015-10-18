@@ -22,3 +22,15 @@ person.say.apply(p,['hello']);
 var newSay = person.say.bind(p,'myhello');
 newSay('world');
 
+function zf(){
+    console.log('zf');
+}
+var px = new Function('s','console.log("px")');
+px();
+var util = require('util');
+console.log(util.inspect(px,true,100,true));
+/*
+function Function(content){
+    var name = content;
+    return name;
+}*/
