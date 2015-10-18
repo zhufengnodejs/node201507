@@ -15,4 +15,4 @@ console.log(__dirname);
     console.log(a);
 })*/
 
-process.kill(5224,"SIGTERM");
+process.kill(3564,"SIGTERM");
