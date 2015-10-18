@@ -1,5 +1,5 @@
 /**
- *
+ * eventemitter
  */
 
 var EventEmitter = require('events').EventEmitter;
