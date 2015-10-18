@@ -11,7 +11,7 @@
 <script>
     function change(){
         var xhr = new XMLHttpRequest();
-        xhr.open('get','/ajax');
+        xhr.open('post','http://localhost:8080/ajax');
         xhr.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
                 document.getElementById('content').innerHTML = this.responseText;

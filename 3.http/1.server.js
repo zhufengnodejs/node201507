@@ -17,7 +17,8 @@ http.createServer(function(request,response){
     var urls = request.url.split('?');
     var pathname = urls[0];
     var query = urls[1];
-    var name = query?query.split('=')[1]:'error';
+    //var name = query?query.split('=')[1]:'error';
+    var name ='zfpx2';
     console.log('getfile');
     getFile(pathname.slice(1),response);
     // a/b/index.html
@@ -28,12 +29,13 @@ http.createServer(function(request,response){
                 response.end('Can not find file');
             }else{
                 //写入响应头
+                data = data.replace('<%=name%>',name);
                 response.writeHead(200, {
-                    'Content-Length': data.length,
+                    //'Content-Length': data.length,
                     'Content-Type':mime.lookup(filename)+';charset=utf-8'
                 });
                 //getContentType(filename)+';charset=utf-8'
-                data = data.replace('<%=name%>',name);
+
                 response.write(data);//写入响应
                 response.end();//结束响应
                 console.log('end');
