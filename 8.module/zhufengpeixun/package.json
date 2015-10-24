@@ -1,0 +1,15 @@
+{
+  "name": "zhufengpeixun",
+  "version": "1.0.0",
+  "description": " this is a test project",
+  "main": "index.js",
+  "scripts": {
+    "start":"node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "zhufengpeixun"
+  ],
+  "author": "zhang_renyang@126.com",
+  "license": "MIT"
+}
