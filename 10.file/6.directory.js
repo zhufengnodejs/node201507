@@ -12,9 +12,22 @@ fs.mkdirP = function(dir){
         }
    }
 }
-fs.rmdirP = function(dir){
-
-}
+// 2
+fs.rmdirP = function(path) {
+    var files = [];
+    if( fs.existsSync(path) ) {
+        files = fs.readdirSync(path);
+        files.forEach(function(file,index){
+            var curPath = path + "/" + file;
+            if(fs.lstatSync(curPath).isDirectory()) { // recurse
+                fs.rmdirP(curPath);
+            } else { // delete file
+                fs.unlinkSync(curPath);//删除文件
+            }
+        });
+        fs.rmdirSync(path);//删除文件夹
+    }
+};
 fs.mkdirP('2/2/2',function(err){
     if(err){
         console.error(err);
@@ -24,3 +37,40 @@ fs.mkdirP('2/2/2',function(err){
 });
 //rmdirSync 只能删除空目录
 fs.rmdirP('2');
+/**
+ * size: 1, 文件的大小
+ * atime access time 最后的访问
+ * mtime modify time 最后的修改时间
+ * ctime create time 最后的创建时间
+ * birthtime 出生时间
+ */
+fs.stat('./write.txt',function(err,stats){
+    console.log(stats);
+    console.log(stats.isDirectory());
+    console.log(stats.isFile());
+});
+//判断文件是否存在
+fs.exists('./write.txt',function(exists){
+    console.log(exists);
+});
+
+//取得文件的绝对路径
+/*fs.realpath('./test',function(err,path){
+    if(err)
+        console.error(err);
+    console.log(path);
+});*/
+fs.rename('./1/test','./2/test2',function(err){
+    if(err)
+        console.error(err);
+});
+
+var filename = './write.txt';
+fs.stat(filename,function(err,stat){
+    console.log(stat.size);
+    fs.truncate(filename,1,function(err){
+        fs.stat(filename,function(err,stat2){
+            console.log(stat2.size);
+        });
+    });
+});
