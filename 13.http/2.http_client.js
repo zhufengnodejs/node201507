@@ -14,7 +14,7 @@ var options = {
     query: { name: 'zfpx' },
     pathname: '/index/index.html',
     path: '/index/index.html?name=zfpx',
-    headers:{'Content-Type':'application/x-www-form-urlencoded'},//当提交表单的时候会把表单序列化成这种类型 url query查询字符是一样的
+    headers:{'connection':'close','Content-Type':'application/x-www-form-urlencoded'},//当提交表单的时候会把表单序列化成这种类型 url query查询字符是一样的
     headers:{'Content-Type':'application/json'},
     headers:{'Content-Type':'application/xml'},
     href: 'http://zfpx:12345@localhost:8080/index/index.html?name=zfpx' }
