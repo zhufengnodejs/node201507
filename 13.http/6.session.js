@@ -8,6 +8,12 @@ var url = require('url');
 var querystring = require('querystring');
 var CARD_NUM = 'card_num';
 var sessions = {};
+/**
+ * 1.先访问 / 显示登陆页面。
+ * 2.用户填 写用户名进行提交，提交到/login  把用户名和余额写到session里
+ * 3.访问 /home页面，显示用户名和余额，每访问一次余额-10.
+ *
+ */
 http.createServer(function(req,res){
     var urlObj = url.parse(req.url);
     var pathname = urlObj.pathname;
