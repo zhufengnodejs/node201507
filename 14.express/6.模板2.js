@@ -19,6 +19,5 @@ app.get('/login',function(req,res){
   res.render('login',{username:'zhangsan'});
 });
 
-
 app.listen(8080);
 
