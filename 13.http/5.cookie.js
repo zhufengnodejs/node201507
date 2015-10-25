@@ -7,7 +7,7 @@ var querystring = require('querystring');
  * Path 路径 控制访问哪些路径的时候发送cookie
  *
  * Expires/Max-Age 设置cookie过期时间或有效期的
- * HTTP 为了安全，不允许javascript修改cookie
+ * HttpOnly 为了安全，不允许javascript修改cookie
  * Secure 只限于https服务器使用
  *
  * Cookie:name=zfpx; name2=zfpx2
@@ -20,7 +20,8 @@ http.createServer(function(req,res) {
     } else if (pathname == '/write') {
         //res.setHeader('Set-Cookie','name=zfpx; Expires='+new Date(new Date().getTime()+20000).toGMTString());//设置一个header ,名称固定就叫Set-Cookie
         //res.setHeader('Set-Cookie','name=zfpx; Max-Age='+20);//设置一个header ,名称固定就叫Set-Cookie
-        res.setHeader('Set-Cookie','name=zfpx; HttpOnly');//只能通过HTTP查看，不能通过js操作
+        res.setHeader('Set-Cookie','name=zfpx');//只能通过HTTP查看，不能通过js操作
+        res.setHeader('Set-Cookie','isAdmin=0');
         res.end('write');
     }else if(pathname == '/read'){
         var cookie = req.headers.cookie;
@@ -37,10 +38,10 @@ http.createServer(function(req,res) {
         //name=zfpx&name2=zfpx2 name=zfpx; name2=zfpx2
         var cookieObj = querystring.parse(cookie,'; ');
         console.log(cookieObj);
-        if(cookieObj && cookieObj.name){
-            res.end('old friend');
+        if(cookieObj && cookieObj.isAdmin==1){
+            res.end('admin');
         }else{
-            res.end('new friend');
+            res.end('guest');
         }
     }
 }).listen(8080);
