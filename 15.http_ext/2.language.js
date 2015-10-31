@@ -7,7 +7,7 @@ var app = express();
 app.set('view engine','ejs');//模板引擎
 app.set('views',__dirname); //设置模板的存放位置
 var core = require('./core');
-var serverLan = ['en','zh'];//服务器端能提供的语言
+var serverLan = ['en','zh','jp'];//服务器端能提供的语言
 app.get('/',function(req,res){
     var language = getLanguage(req,res);
     res.setHeader('content-language',language);

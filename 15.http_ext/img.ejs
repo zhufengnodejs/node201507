@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        img{
+            max-width: 100px;
+            border:1px solid #aaa;
+        }
+        .item{
+            width:100px;
+            height:100px;
+
+        }
+    </style>
+</head>
+<body>
+<div class="item">
+    相同的域名
+    <img src="/img/logo.jpg" alt=""/>
+</div>
+
+<div class="item">
+    不同域名 但在白名单内
+    <img src="http://a.zfpx.cn:8080/img/logo.jpg" alt=""/>
+</div>
+
+<div class="item">
+    不同域名 不在白名单内
+    <img src="http://b.zfpx.cn:8080/img/logo.jpg" alt=""/>
+</div>
+</body>
+</html>
