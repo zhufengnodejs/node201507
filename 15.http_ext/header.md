@@ -12,7 +12,7 @@ Request Headers
 
 accept:text/css,*/*;q=0.1 可能接收的内容类型
 accept-encoding:gzip, deflate, sdch 可以接收的编码
-accept-language:en,zh-CN;q=0.8,zh;q=0.6 可以接收的语言类型
+accept-language:en;q=1,zh-CN;q=0.8,zh;q=0.6 可以接收的语言类型
 cache-control:max-age=0 缓存控制
 if-modified-since:Fri, 30 Oct 2015 08:58:01 GMT 自从此时间过是否修改过
 if-none-match:"3367624241" 是否内容变化了
