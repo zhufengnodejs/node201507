@@ -5,7 +5,15 @@
     <title></title>
 </head>
 <body>
-
+<%=hello%>
+<%-hello%>
+<%
+ for(var i=0;i<10;i++){
+   %>
+    混合显示
+   <%
+ }
+%>
 <form action="/login" method="post">
     用户名 <input type="text" name="username"/>
     密码 <input type="text" name="password"/>
