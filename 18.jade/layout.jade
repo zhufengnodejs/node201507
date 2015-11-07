@@ -1,0 +1,11 @@
+//-
+   如果哪个模板继承了layout,就可以把里的block替换
+head
+   include head
+   include title.html
+body
+   #head i am tail
+   block main
+      p 首页
+   #tail i am tail
+
