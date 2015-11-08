@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/bootstrap.css"/>
+</head>
+<body ng-controller="appCtrl">
+
+    <div class="form-group">
+        <label for="username" class="control-label">用户名</label>
+        <input type="text" id="username" ng-model="user.username" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="password" class="control-label">密码</label>
+        <input type="text" id="password" ng-model="user.password" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-default" ng-click="get()">获取值</button>
+        <button class="btn btn-default" ng-click="set()">设置值</button>
+        <button class="btn btn-danger" ng-click="reset()">重置值</button>
+        <button class="btn btn-danger" ng-click="save()">保存</button>
+    </div>
+
+</body>
+<script src="/angular.js"></script>
+<script>
+    var appModule = angular.module('appModule',[]);
+    appModule.controller('appCtrl',function($scope,$http){
+        $scope.user = {};
+        $scope.set = function(){
+            $scope.user = {username:'zfpx',password:'123'};
+        }
+        $scope.get = function(){
+            alert(JSON.stringify($scope.user));
+        }
+        $scope.reset = function(){
+            $scope.user = {};
+        }
+        $scope.save = function(){
+            //$scope.user
+            $http({
+                url:'/user/add',
+                method:'POST',
+                data:$scope.user
+            }).success(function(data){
+                console.log($scope.user);
+                alert(data);
+            }).error(function(err){
+                alert('err',err);
+                console.log(err);
+            });
+        }
+    });
+
+</script>
+</html>

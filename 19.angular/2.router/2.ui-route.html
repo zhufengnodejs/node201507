@@ -21,12 +21,13 @@
 <script>
     // app -> config -> run(初始化方法) ->
     var app = angular.module('appModule',['ui.router']);
-    app.run(function($rootScope){
+    app.run(function($rootScope,$state){
         $rootScope.$on('$stateChangeStart',function(event,toState,toParams,fromState,fromParams){
             if(toState.needLogin){
                 if(!$rootScope.username){
                     alert('你还没登陆');
                     event.preventDefault();//阻止跳转
+                    $state.go('login');
                     return false;
                 }
             }
@@ -63,11 +64,15 @@
         }).state('user.add',{
             url:'/add',//添加用户
             templateUrl:'./add.html',
-            controller:'addCtrl'
+            controller:'addCtrl',
+            needLogin:true
         }).state('user.view',{
             url:'/view/:id',//查看用户信息
             templateUrl:'./view.html',
             controller:'viewCtrl'
+        }).state('login',{
+            url:'/login',//查看用户信息
+            template:'请登陆'
         })
     });
     app.controller('homeCtrl',function($scope){
