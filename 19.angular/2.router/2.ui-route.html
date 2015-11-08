@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap.css"/>
+</head>
+<body>
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li ng-class="{active:'home'==current}"><a href="#" ui-sref="home">首页</a></li>
+        <li ng-class="{active:'user'==current}"><a href="#" ui-sref="user">用户管理</a></li>
+        <li ng-class="{active:'profile'==current}"><a href="#" ui-sref="profile">个人信息</a></li>
+    </ul>
+    <div ui-view></div>
+</div>
+
+</body>
+<script src="angular.js"></script>
+<script src="angular-ui-router.js"></script>
+<script>
+    // app -> config -> run(初始化方法) ->
+    var app = angular.module('appModule',['ui.router']);
+    app.run(function($rootScope){
+        $rootScope.$on('$stateChangeStart',function(event,toState,toParams,fromState,fromParams){
+            if(toState.needLogin){
+                if(!$rootScope.username){
+                    alert('你还没登陆');
+                    event.preventDefault();//阻止跳转
+                    return false;
+                }
+            }
+            $rootScope.current = toState.name;
+        });
+    });
+    app.config(function($stateProvider){
+        $stateProvider.state('home',{
+            url:'/home',//定义路径
+            templateUrl:'./home.html',
+            controller:'homeCtrl'
+        }).state('user',{
+            url:'/user',//用户管理
+            templateUrl:'./user.html',
+            controller:'userCtrl'
+        }).state('profile',{
+            url:'/profile',//个人信息
+            views:{
+                '':{
+                    templateUrl:'./profile.html'
+                },
+                'name@profile':{
+                    templateUrl:'./name.html'//模板的url
+                },'age@profile':{
+                    template:'<h1>hello</h1>'//普通 的HTML片断
+                }
+            }
+          /*  templateUrl:'./profile.html',
+            controller:'profileCtrl'*/
+        }).state('user.list',{
+            url:'/list',//用户列表
+            templateUrl:'./list.html',
+            controller:'listCtrl'
+        }).state('user.add',{
+            url:'/add',//添加用户
+            templateUrl:'./add.html',
+            controller:'addCtrl'
+        }).state('user.view',{
+            url:'/view/:id',//查看用户信息
+            templateUrl:'./view.html',
+            controller:'viewCtrl'
+        })
+    });
+    app.controller('homeCtrl',function($scope){
+
+    });
+    app.controller('userCtrl',function($scope){
+
+    });
+    app.controller('profileCtrl',function($scope){
+
+    });
+
+    app.controller('addCtrl',function($scope){
+        $scope.title = "add";
+    });
+
+    app.controller('listCtrl',function($scope){
+        $scope.title = "list";
+    });
+
+    app.controller('viewCtrl',function($scope,$stateParams){
+        $scope.title = "view";
+        $scope.id = $stateParams.id;
+    });
+
+</script>
+</html>
