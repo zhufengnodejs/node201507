@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap.css"/>
+</head>
+<body>
+    <div ng-controller="detailController1">
+        <input type="text" ng-model="age1" ng-change="change()"/>
+    </div>
+    <div ng-controller="detailController2">
+        <input type="text" ng-model="age2" ng-change="change()"/>
+    </div>
+
+</body>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('detailController1',function($rootScope,$scope){
+        $scope.change = function(){
+            $scope.$emit('change',$scope.age1);
+        }
+    });
+    app.controller('detailController2',function($rootScope,$scope){
+        $rootScope.$on('change',function(event,age2){
+            $scope.age2 = age2;
+        });
+    });
+
+</script>
+</html>

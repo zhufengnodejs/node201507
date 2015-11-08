@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap.css"/>
+</head>
+<body>
+<div class="container" ng-controller="CartController">
+    总金额 <input type="text" ng-model="total" ng-change="change()"/>
+    <div ng-controller="detailController">
+        名称{{item.name}}
+        价格{{item.price}}
+        数量<input type="text" ng-change="change()" ng-model="item.quantity"/>
+        金额{{item.price*item.quantity}}
+    </div>
+
+</div>
+</body>
+<script src="angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('CartController',function($scope){
+        $scope.total = 10;
+        $scope.$on('changeAmount',function(event,amount){
+            $scope.total =amount;
+        });
+        $scope.change = function(){//向下传递事件
+            $scope.$broadcast('changeTotal',$scope.total);
+        }
+    });
+
+    app.controller('detailController',function($scope){
+        $scope.item =  {name:'大米',quantity:1,price:10};
+        $scope.change = function(){
+            $scope.$emit('changeAmount',$scope.item.price*$scope.item.quantity);
+        }
+        $scope.$on('changeTotal',function(event,total){
+            $scope.item.quantity = total/$scope.item.price;
+        });
+    });
+</script>
+</html>

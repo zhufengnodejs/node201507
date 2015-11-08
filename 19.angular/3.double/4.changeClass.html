@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap.css"/>
+</head>
+<body>
+<div class="form-group" ng-class="{'has-error':username.length<3 || username.length>6}">
+    <label for="username" class="control-label">用户名</label>
+    <input type="text" id="username" ng-model="username" class="form-control"/>
+</div>
+<!-- 小于等于6位，   大于6位-->
+<div ng-show="username">
+    校验成功
+</div>
+<div  ng-hide="username">
+    校验成功
+</div>
+
+</body>
+<script src="angular.js"></script>
+
+</html>
