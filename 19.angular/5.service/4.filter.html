@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+ {{130000000000|date}}
+ {{130000000000|date:"yyyy-MM-dd hh:mm:ss"}}
+ {{999.99999|limitTo:2}}
+ {{"ABCDE"|lowercase}}
+
+{{"hello"|strong:'tail222'}}
+</body>
+<script src="./angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.filter('strong',function(){
+        return function(item,tail){
+            return '<b>'+item+'</b>'+tail;
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="MyCtrl">
+    <ul>
+        <li ng-repeat="user in users">
+            {{user.name}}
+        </li>
+    </ul>
+</div>
+</body>
+<script src="/angular.js"></script>
+<script>
+var app = angular.module('appModule',[]);
+//定义一个服务
+app.factory('UserInfo',function($http,$q){
+    return {
+        query:function(){
+            var defer = $q.defer();
+            $http.get('/list').success(function(data){
+                defer.resolve(data);//成功
+            }).error(function(data){
+                defer.reject(data);//失败
+            });
+            return defer.promise;
+        }
+    }
+});
+app.controller('MyCtrl',function($scope,UserInfo){
+    var promise = UserInfo.query();
+    promise.then(function(data){
+        $scope.users = data;
+    },function(){
+        alert('查询出错了');
+    });
+});
+</script>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="personCtrl">
+    老大<girl></girl>
+    老二<girl></girl>
+    老三<girl></girl>
+</div>
+
+</body>
+<script src="../angular.js"></script>
+<script>
+var app = angular.module('appModule',[]);
+app.controller('personCtrl',function($scope){
+
+});
+app.directive('girl',function(){
+    return {
+        restrict:'E',// Element元素 Attribute属性 Class Comment
+        template:'<input ng-model="username">',
+        replace:true,
+        scope:{}//创建独立scope,指令之间互相独立，互不影响
+    }
+});
+</script>
+</html>

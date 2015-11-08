@@ -16,12 +16,17 @@
 <script>
     // app -> config -> run ->
     var app = angular.module('appModule',['ngRoute']);
-    app.config(function($routeProvider){
+    angular.module('appModule').run(function($templateCache){
+        $templateCache.put('home','<div>hellodiv</div>');
+        $templateCache.put('list','<div>hellodiv</div>');
+    });
+
+    app.config(function($routeProvider,$templateCache){
         $routeProvider.when('/home',{
-            templateUrl:'./tmpl/home.html',
+            template:$templateCache.get('home'),
             controller:'homeCtrl'
         }).when('/list',{
-            templateUrl:'./tmpl/list.html',
+            template:$templateCache.get('list'),
             controller:'ListCtrl'
         });
     });

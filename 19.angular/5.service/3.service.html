@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="MyCtrl">
+   {{num}}
+</div>
+</body>
+<script src="./angular.js"></script>
+<script>
+var app = angular.module('appModule',[]);
+//1.定制provider
+//返回，也就是我们注入的是 定义时的对象的$get函数属性。的返回值
+/*app.provider('ageService',{
+    $get:function(){
+        return 3;
+    }
+})*/
+//如果是一个函数，会new这个对象，调用它的$get属性得到返回值
+/*app.provider('ageService',function(){
+    this.age= 7;
+    this.$get = function(){
+        return this.age;
+    }
+})*/
+//注入的是定义的函数的返回值
+/*app.factory('ageService',function(){
+    return new function(){
+        this.age = 6;
+    };
+});*/
+
+/*app.service('ageService',function(){
+    this.age = 6;
+})*/
+
+app.constant('ageService',{age:6});
+//app.value('ageService',{age:6});
+// 这里配置的是provider的实例
+app.config(function(ageService){
+    //ageServiceProvider.age = 100;
+    ageService = 300;
+});
+
+app.controller('MyCtrl',function($scope){
+  //$scope.num = ageService.age;
+});
+</script>
+</html>
