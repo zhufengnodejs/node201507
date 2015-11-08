@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html >
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body  ng-app="appModule">
+<div ng-controller="appCtrl">
+{{nums|limitTo:3}}
+</div>
+
+</body>
+<script src="angular.js"></script>
+<script>
+    // appModule $rootScope  根使用域
+    var app = angular.module('appModule',[]);
+    // mvc//控制器的定义 在模块下声明控制器
+    app.controller('appCtrl',function($rootScope,$scope){//2
+        $scope.number = 999.999;
+        $scope.nums = [1,2,3,4,5];
+        //$scope.number = Math.floor($scope.number);
+
+    });
+
+
+</script>
+</html>

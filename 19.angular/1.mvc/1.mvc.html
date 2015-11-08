@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html >
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body  ng-app="appModule">
+<div ng-controller="appCtrl">
+  hello {{name}}
+    {{person.name}}
+    {{age}}
+    {{pname}}
+</div>
+<div ng-controller="appCtrl">
+    hello {{name}}
+    {{person.name}}
+</div>
+<div ng-controller="appCtrl">
+    hello {{name}}
+    {{person.name}}
+</div>
+</body>
+<script src="angular.js"></script>
+<script>
+    // appModule $rootScope  根使用域
+    var app = angular.module('appModule',[]);
+    // mvc//控制器的定义 在模块下声明控制器
+    app.controller('appCtrl',function($rootScope,$scope){//2
+        $scope.name = "zfpx";
+        $scope.person = {
+            name:'zf'
+        }
+    });
+    function fillScope($scope){
+        $scope.name = "zfpx";
+        $scope.person = {
+            name:'zf'
+        }
+    }
+
+    app.controller('appCtrl2',function($scope,$rootScope){//控制器的定义3
+       /* $scope.name = "zfpx2";
+        $scope.$parent.pname = 'pname';
+        $rootScope.age = '我是根作用域上的年龄';*/
+        fillScope($scope);
+
+    });
+
+</script>
+</html>
