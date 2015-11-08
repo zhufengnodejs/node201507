@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<hello>world</hello>
+<div hello>world</div>
+<div class="hello">world</div>
+
+<transclude>world</transclude>
+
+</body>
+<script src="../angular.js"></script>
+<script>
+angular.module('appModule',[]);
+angular.module('appModule').run(function($templateCache){
+    //模板的容器，是一个空对象 {}
+    $templateCache.put('hello','<div>hellodiv</div>');
+    $templateCache.put('hello2','<div>hellodiv2</div>');
+});
+angular.module('appModule').directive('hello',function(){
+    return {
+        restrict:'AECM',// Element元素 Attribute属性 Class Comment
+        template:'<span>hello</span>',
+        replace:true
+    }
+});
+angular.module('appModule').directive('transclude',function($templateCache){
+    return {
+        restrict:'AECM',
+        transclude:true,//保留原来的子元素
+        //template:'<span><div ng-transclude></div></span>'//ng-transclude引用原来的子元素
+        //templateUrl:'./span.html'
+        template:$templateCache.get('hello')
+    }
+});
+
+</script>
+</html>

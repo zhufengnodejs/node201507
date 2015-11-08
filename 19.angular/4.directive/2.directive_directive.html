@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<girl flower  ></girl>
+</body>
+<script src="../angular.js"></script>
+<script>
+var app = angular.module('appModule',[]);
+
+app.directive('girl',function(){
+    return {
+        restrict:'E',// Element元素 Attribute属性 Class Comment
+        template:'<h1>林志玲</h1>',
+        //这是本指令向外界暴露的对象
+        controller:function($scope){
+            $scope.gifts = [];
+            this.receive = function(gift){
+                $scope.gifts.push(gift);
+            }
+        },
+        link:function(scope,element,attrs){
+            element.bind('click',function(){
+                alert(scope.gifts);
+            });
+        }
+    }
+});
+app.directive('flower',function(){
+    return {
+        require:'^girl',
+        link:function(scope,element,attrs,girlCtrl){
+            girlCtrl.receive('flower');
+        }
+    }
+});
+app.directive('diamond',function(){
+    return {
+        require:'^girl',
+        link:function(scope,element,attrs,girlCtrl){
+            girlCtrl.receive('diamond');
+        }
+    }
+});
+
+
+
+</script>
+</html>

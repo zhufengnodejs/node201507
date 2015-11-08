@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="MyCtrl">
+    <person like="fight()">孙悟空</person>
+</div>
+<div ng-controller="MyCtrl2">
+    <person like="eat()">八戒</person>
+</div>
+</body>
+<script src="../angular.js"></script>
+<script>
+var app = angular.module('appModule',[]);
+app.controller('MyCtrl',function($scope){
+    $scope.hobby = '打架';
+    $scope.fight = function(){
+        alert('喜欢'+$scope.hobby);
+    }
+});
+app.controller('MyCtrl2',function($scope){
+    $scope.hobby = '吃';
+    $scope.eat = function(){
+        alert('喜欢'+$scope.hobby);
+    }
+});
+app.directive('person',function(){
+    return {
+        restrict:'E',// Element元素 Attribute属性 Class Comment
+        //链接 操作DOM 绑定事件
+        //scope 当前指令的作用域 当前元素本身 当前元素的属性
+        link:function(scope,element,attrs){
+            // 给元素绑定事件
+            element.bind('click',function(){
+               /* //1.直接调用控制器上的方法
+                scope.fight();
+                //2.直接调用控制器上的方法
+                scope.$apply('fight()');*/
+                //3.根据指令的不同属性，调用scope上的方法
+                //scope.$apply(attrs['like']);
+                scope.$apply(element.attr('like'));
+            });
+        }
+    }
+});
+
+
+</script>
+</html>
