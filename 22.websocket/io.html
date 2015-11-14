@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="hall">进入hall聊天室</button>
+<button id="home">进入家庭聊天室</button>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+window.onload = function(){
+    var socket = io.connect('http://localhost:8080/');
+    socket.on('connect',function(){
+        //console.log('连接成功');
+        //socket.send('我来了');
+        //socket.emit('join','我的家');
+        document.getElementById('hall').addEventListener('click',function(){
+            socket.emit('join','hall');
+        })
+    });
+    socket.on('message',function(msg){
+        console.log('socket',msg);
+    });
+
+       var socket2 = io.connect('http://localhost:8080/');
+       socket2.on('connect',function(){
+           document.getElementById('home').addEventListener('click',function(){
+               socket2.emit('join','home');
+           })
+       });
+       socket2.on('message',function(msg){
+           console.log('socket2',msg);
+       });
+}
+</script>
+</html>

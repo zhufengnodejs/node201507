@@ -5,7 +5,7 @@ var job = new CronJob("0 * * * * * *",function(){
 
 job.start();
 /**
- * 秒 分 小时 日 月 dayofweek
+ *  分 小时 日 月 dayofweek
  *  * 每xx一次
  *  a-b 第几秒到第几秒
  *  星/n 每隔多少秒
